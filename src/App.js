@@ -7,18 +7,33 @@ import './App.css';
 import React from 'react';
 
 
-const defaultTodos = [
-  {text: 'Cortar cebolla', completed:true},
-  {text: 'Tomar el curso de intero de react.js', completed:false},
-  {text: 'Llorar con samuel', completed:false},
-  {text: 'lalala', completed:false}
-];
-
+// const defaultTodos = [
+//   {text: 'Cortar cebolla', completed:true},
+//   {text: 'Tomar el curso de intero de react.js', completed:false},
+//   {text: 'Llorar con samuel', completed:false},
+//   {text: 'lalala', completed:false}
+// ];
+// Funcion principal
 function App() {
+
+  const localStorageTodos = localStorage.getItem('TAREAS_V1');
+  let parsedTodos;
+
+  if(!localStorageTodos){
+
+    localStorage.setItem('TAREAS_V1', JSON.stringify([]));
+    parsedTodos = [];
+
+  }else{
+
+    parsedTodos = JSON.parse(localStorageTodos);
+
+  }
+
 
   const [valorinput, setValorInput] = React.useState("");
 
-  const [todoCompleted, setTodoCompleted] = React.useState(defaultTodos);
+  const [todoCompleted, setTodoCompleted] = React.useState(parsedTodos);
   const completdTodo = todoCompleted.filter(todoItem => todoItem.completed).length;
   const totalTodo    = todoCompleted.length;
 
@@ -49,7 +64,15 @@ function App() {
 
       }
       
-      setTodoCompleted(nuevaLista);
+      saveTodos(nuevaLista);
+
+    };
+    
+    const saveTodos = (newTodo) => {
+
+      localStorage.setItem('TAREAS_V1', JSON.stringify(newTodo));
+      
+      setTodoCompleted(newTodo);
 
     };
 
@@ -64,7 +87,7 @@ function App() {
 
       nuevaLista.splice(indexTodo,1);
       
-      setTodoCompleted(nuevaLista);
+      saveTodos(nuevaLista);
 
     };
 
