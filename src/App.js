@@ -7,33 +7,44 @@ import './App.css';
 import React from 'react';
 
 
-// const defaultTodos = [
-//   {text: 'Cortar cebolla', completed:true},
-//   {text: 'Tomar el curso de intero de react.js', completed:false},
-//   {text: 'Llorar con samuel', completed:false},
-//   {text: 'lalala', completed:false}
-// ];
-// Funcion principal
-function App() {
 
-  const localStorageTodos = localStorage.getItem('TAREAS_V1');
-  let parsedTodos;
+function useLocalStorage(itemName,initialValue) {
 
-  if(!localStorageTodos){
+  
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
 
-    localStorage.setItem('TAREAS_V1', JSON.stringify([]));
-    parsedTodos = [];
+  if(!localStorageItem){
+
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
 
   }else{
 
-    parsedTodos = JSON.parse(localStorageTodos);
+    parsedItem = JSON.parse(localStorageItem);
 
   }
 
+  const [item,setItem] = React.useState(parsedItem);
+
+  const saveTodos = (newItem) => {
+
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+    
+    setItem(newItem);
+
+  };
+
+  return [item,saveTodos];
+
+}
+
+
+function App() {
 
   const [valorinput, setValorInput] = React.useState("");
 
-  const [todoCompleted, setTodoCompleted] = React.useState(parsedTodos);
+  const [todoCompleted, saveTodos] = useLocalStorage('TAREAS_V1',[]);
   const completdTodo = todoCompleted.filter(todoItem => todoItem.completed).length;
   const totalTodo    = todoCompleted.length;
 
@@ -65,14 +76,6 @@ function App() {
       }
       
       saveTodos(nuevaLista);
-
-    };
-    
-    const saveTodos = (newTodo) => {
-
-      localStorage.setItem('TAREAS_V1', JSON.stringify(newTodo));
-      
-      setTodoCompleted(newTodo);
 
     };
 
