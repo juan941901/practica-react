@@ -7,6 +7,8 @@ import React from 'react';
 
 function AppUi(
     {
+        loading,
+        error,
         completdTodo,
         totalTodo,
         completeTodo,
@@ -34,6 +36,9 @@ return (
     />
     <Todolist>
 
+      {loading && <p>Estamos cargando..</p>}
+      {error && <p>Desesperate, hubo un error !</p>}
+      {!loading && filtroValores.length===0 && <p>No hay tareas</p>}
       {filtroValores.map(todo => (
 
         <TodoItem 

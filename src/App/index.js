@@ -7,7 +7,14 @@ function App() {
 
   const [valorinput, setValorInput] = React.useState("");
 
-  const [todoCompleted, saveTodos] = useLocalStorage('TAREAS_V1',[]);
+  const {
+          item: todoCompleted,
+          saveTodos,
+          loading,
+          error
+  
+   } = useLocalStorage('TAREAS_V1',[]);
+
   const completdTodo = todoCompleted.filter(todoItem => todoItem.completed).length;
   const totalTodo    = todoCompleted.length;
 
@@ -61,6 +68,8 @@ function App() {
 
       <AppUi 
       
+        loading = {loading}
+        error = {error}
         completdTodo = {completdTodo}
         totalTodo = {totalTodo}
         completeTodo = {completeTodo}
