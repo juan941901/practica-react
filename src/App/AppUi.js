@@ -3,6 +3,9 @@ import { TodoSearch } from '../TodoSearch';
 import { Todolist } from '../Todolist';
 import { TodoItem } from '../TodoItem';
 import {CreateTodoButton} from '../CreateTodoButton';
+import {TodosLoading} from '../TodosLoading';
+import { TodosError } from '../TodosError';
+import { EmptyTodos } from '../EmptyTodos';
 import React from 'react';
 
 function AppUi(
@@ -36,9 +39,15 @@ return (
     />
     <Todolist>
 
-      {loading && <p>Estamos cargando..</p>}
-      {error && <p>Desesperate, hubo un error !</p>}
-      {!loading && filtroValores.length===0 && <p>No hay tareas</p>}
+      {loading && <React.Fragment> 
+            <TodosLoading />
+            <TodosLoading />
+            <TodosLoading />
+         
+         </React.Fragment>
+        }
+      {error && <TodosError />}
+      {!loading && filtroValores.length===0 && <EmptyTodos />}
       {filtroValores.map(todo => (
 
         <TodoItem 
