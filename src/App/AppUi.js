@@ -39,7 +39,9 @@ return (
     />
     <Todolist>
 
-      {loading && <React.Fragment> 
+      {loading && 
+        <React.Fragment> 
+
             <TodosLoading />
             <TodosLoading />
             <TodosLoading />
