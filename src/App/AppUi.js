@@ -11,19 +11,19 @@ import React from 'react';
 
 function AppUi(){
 
+  const {
+    loading,
+    error,
+    completeTodo,
+    deleteTodo,
+    filtroValores
+        } = React.useContext(TodoContext);
+
 return (
     
     <React.Fragment>
     <TodoCounter />
     <TodoSearch />
-    <TodoContext.Consumer>
-    {({
-                loading,
-                error,
-                completeTodo,
-                deleteTodo,
-                filtroValores
-            }) => (
       <Todolist>
 
       {loading && 
@@ -50,8 +50,6 @@ return (
       }
 
     </Todolist>
-    )}
-    </TodoContext.Consumer>
     <CreateTodoButton />
     </React.Fragment>
   
