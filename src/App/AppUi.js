@@ -6,38 +6,25 @@ import {CreateTodoButton} from '../CreateTodoButton';
 import {TodosLoading} from '../TodosLoading';
 import { TodosError } from '../TodosError';
 import { EmptyTodos } from '../EmptyTodos';
+import { TodoContext} from '../TodoContext';
 import React from 'react';
 
-function AppUi(
-    {
-        loading,
-        error,
-        completdTodo,
-        totalTodo,
-        completeTodo,
-        deleteTodo,
-        valorinput,
-        setValorInput,
-        filtroValores
-    }
-){
+function AppUi(){
 
 return (
     
     <React.Fragment>
-    <TodoCounter 
-    
-      completed={completdTodo}
-      total={totalTodo}
-      
-    />
-    <TodoSearch
-    
-      valorinput = {valorinput}
-      setValorInput = {setValorInput}
-    
-    />
-    <Todolist>
+    <TodoCounter />
+    <TodoSearch />
+    <TodoContext.Consumer>
+    {({
+                loading,
+                error,
+                completeTodo,
+                deleteTodo,
+                filtroValores
+            }) => (
+      <Todolist>
 
       {loading && 
         <React.Fragment> 
@@ -45,8 +32,8 @@ return (
             <TodosLoading />
             <TodosLoading />
             <TodosLoading />
-         
-         </React.Fragment>
+        
+        </React.Fragment>
         }
       {error && <TodosError />}
       {!loading && filtroValores.length===0 && <EmptyTodos />}
@@ -63,6 +50,8 @@ return (
       }
 
     </Todolist>
+    )}
+    </TodoContext.Consumer>
     <CreateTodoButton />
     </React.Fragment>
   
