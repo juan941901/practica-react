@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/practica-react/static/css/main.28659f16.css",
+    "main.js": "/practica-react/static/js/main.041f8f10.js",
+    "static/media/delete_black.svg": "/practica-react/static/media/delete_black.44e296436477fd4eb067c3ddbd2a9cff.svg",
+    "index.html": "/practica-react/index.html",
+    "static/media/check_black.svg": "/practica-react/static/media/check_black.735cce6eb65dcba319e09bb304a1c90d.svg",
+    "main.28659f16.css.map": "/practica-react/static/css/main.28659f16.css.map",
+    "main.041f8f10.js.map": "/practica-react/static/js/main.041f8f10.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28659f16.css",
+    "static/js/main.041f8f10.js"
+  ]
+}
