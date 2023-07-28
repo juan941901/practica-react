@@ -6,6 +6,7 @@ const TodoContext = React.createContext();
 function TodoProvider({children}){
 
     const [valorinput, setValorInput] = React.useState("");
+    const [openModal, setOpenModal] = React.useState(false);
 
   const {
           item: todoCompleted,
@@ -25,6 +26,16 @@ function TodoProvider({children}){
       }
     
     );
+
+    const addTodo = (text) => {
+
+      const nuevaLista = [...todoCompleted];
+      nuevaLista.push({
+        text,
+        completed:false
+      });
+      saveTodos(nuevaLista);
+    };
 
     const completeTodo = (texto) => {
 
@@ -76,7 +87,10 @@ function TodoProvider({children}){
                 deleteTodo,
                 valorinput,
                 setValorInput,
-                filtroValores
+                filtroValores,
+                openModal,
+                setOpenModal,
+                addTodo
             }
         }>
             {children}

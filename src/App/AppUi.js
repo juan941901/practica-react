@@ -6,6 +6,8 @@ import {CreateTodoButton} from '../CreateTodoButton';
 import {TodosLoading} from '../TodosLoading';
 import { TodosError } from '../TodosError';
 import { EmptyTodos } from '../EmptyTodos';
+import { Modal } from '../Modal';
+import { TodoForm } from '../TodoForm';
 import { TodoContext} from '../TodoContext';
 import React from 'react';
 
@@ -16,7 +18,9 @@ function AppUi(){
     error,
     completeTodo,
     deleteTodo,
-    filtroValores
+    filtroValores,
+    openModal,
+    setOpenModal
         } = React.useContext(TodoContext);
 
 return (
@@ -50,7 +54,23 @@ return (
       }
 
     </Todolist>
-    <CreateTodoButton />
+    <CreateTodoButton
+    
+    setOpenModal = {setOpenModal}
+    
+    />
+
+    {openModal && (
+
+      <Modal>
+
+        <TodoForm />
+
+      </Modal>
+
+
+    )}
+
     </React.Fragment>
   
 );
